@@ -1,29 +1,37 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import Home from '../views/Home.vue';
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
+
+const meta = {
+  progress: {
+    func: [
+      { call: 'color', modifier: 'temp', argument: '#00cfff' },
+      { call: 'fail', modifier: 'temp', argument: '#6e0000' },
+      { call: 'location', modifier: 'temp', argument: 'top' },
+      {
+        call: 'transition',
+        modifier: 'temp',
+        argument: { speed: '1.5s', opacity: '0.6s', termination: 400 },
+      },
+    ],
+  },
+};
 
 const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
+    meta: meta,
   },
-  {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
-]
+];
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes
-})
+  routes,
+});
 
-export default router
+export default router;
